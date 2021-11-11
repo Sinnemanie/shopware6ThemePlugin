@@ -20,9 +20,13 @@ export default class Rumble extends AddToCartPlugin {
         this._rumbleButton()
     }
 
-    _refreshCartValue() {
-        const cartWidgetEL = DomAccess.querySelector(this._cartEL, '[data-cart-widget="true"]')
-        const cartWidgetInstance = this.PluginManager.getPluginInstancesFromElement(cartWidgetEL, 'CartWidget')
+_refreshCartValue() {
+    const cartWidgetEL = DomAccess.querySelector(this._cartEL, '[data-cart-widget="true"]')
+        /**
+         * @tutorial
+         * important: getPluginInstanceFromElement (Instance not Instances ;) )
+         */
+        const cartWidgetInstance = this.PluginManager.getPluginInstanceFromElement(cartWidgetEL, 'CartWidget')
         cartWidgetInstance.fetch()
     }
 
