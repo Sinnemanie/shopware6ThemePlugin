@@ -41,8 +41,11 @@ export default class QuantityFieldPlugin extends Plugin {
      */
     increaseQuantity() {
         const step = parseInt(this.options.purchaseSteps)
-        const newQuant = parseInt(this.field.value) - step
+        const newQuant = parseInt(this.field.value) + step
         const maxQuantity = parseInt(this.options.maxQuantity)
+
+        console.log(newQuant, maxQuantity)
+
         /**
          * (re)set Quantity to Max-Value
          */
