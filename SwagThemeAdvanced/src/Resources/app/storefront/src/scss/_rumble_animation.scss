@@ -1,0 +1,38 @@
+//  https://animate.style/
+// https://github.com/animate-css/animate.css/tree/main/source/attention_seekers
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@-webkit-keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.rumble {
+    animation: pulse .8s infinite linear;
+    animation-timing-function: ease-in-out;
+    color: blue;
+    border: 1px solid blue;
+}
