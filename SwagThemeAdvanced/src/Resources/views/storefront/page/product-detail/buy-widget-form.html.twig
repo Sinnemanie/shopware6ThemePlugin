@@ -1,9 +1,12 @@
 {% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
 
  {% block page_product_detail_buy_quantity %}
-
-     <div class="product-detail-detail-quantity-input input-group input-group-lg"
-          data-quantity-field="true">
+     <div id="katjatest" class="product-detail-detail-quantity-input input-group input-group-lg"
+          data-quantity-field="true"
+          data-quantity-field-options='{
+            "purchaseSteps": "{{ page.product.purchaseSteps }}",
+            "maxQuantity": "{{ product.calculatedMaxPurchase }}"
+          }'>
          <div class="input-group-prepend">
              <button class="btn btn-secondary decrease" type="button">
                  -
@@ -14,31 +17,13 @@
                 class="form-control form-control-lg"
                 style="-moz-appearance: textfield"
                 title="Quantity"
-                value="{{ page.product.minPurchase }}">
+                value="{{ page.product.minPurchase }}"
+                max="{{ product.calculatedMaxPurchase}}"
+                min="{{ product.minPurchase }}">
          <div class="input-group-prepend">
              <button class="btn btn-secondary increase" type="button">
                  +
              </button>
          </div>
      </div>
-
-    <hr />
-     <select name="lineItems[{{ product.id }}][quantity]"
-             class="custom-select product-detail-quantity-select">
-         {% for quantity in range(product.minPurchase, product.calculatedMaxPurchase, product.purchaseSteps) %}
-             <option value="{{ quantity }}">
-                 {{ quantity }}
-                 {% if quantity == 1 %}
-                     {% if product.translated.packUnit %} {{ product.translated.packUnit }}{% endif %}
-                 {% else %}
-                     {% if product.translated.packUnitPlural %}
-                         {{ product.translated.packUnitPlural }}
-                     {% elseif product.translated.packUnit %}
-                         {{ product.translated.packUnit }}
-                     {% endif %}
-                 {% endif %}
-             </option>
-         {% endfor %}
-     </select>
-
 {% endblock %}

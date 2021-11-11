@@ -1,14 +1,12 @@
 import Plugin from "src/plugin-system/plugin.class";
 import DomAccess from "src/helper/dom-access.helper";
-
-export default class QuantityField extends Plugin {
+export default class QuantityFieldPlugin extends Plugin {
     init() {
         this.minus = DomAccess.querySelector(this.el, '.decrease')
         this.plus = DomAccess.querySelector(this.el, '.increase')
         this.field = DomAccess.querySelector(this.el, 'input[type="number"]')
 
         this.registerEvents()
-
     }
 
     registerEvents() {
@@ -17,12 +15,17 @@ export default class QuantityField extends Plugin {
     }
 
     decreaseQuantity() {
-        // console.log('- ..');
-        this.field.value = parseInt(this.field.value) - 1
+        const step = parseInt(this.options.purchaseSteps)
+        const newQuant = parseInt(this.field.value) - step
+        if(newQuant <= step) {
+            this.field.value = step
+            return
+        }
+        this.field.value = newQuant
     }
+
     increaseQuantity() {
-        // console.log('+');
-        this.field.value = parseInt(this.field.value) + 1
+        this.field.value = parseInt(this.field.value) + parseInt(this.options.purchaseSteps)
 
     }
 }
