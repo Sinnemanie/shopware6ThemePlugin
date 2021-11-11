@@ -9,7 +9,6 @@ export default class ThemeCartWidgetPlugin extends CartWidgetPlugin {
         }
 
         super.init();
-        console.log('super init 2')
     }
 
     afterFetch(event) {
@@ -19,19 +18,14 @@ export default class ThemeCartWidgetPlugin extends CartWidgetPlugin {
 
         [...document.querySelectorAll('[data-cart-widget="true"]')].forEach((element) => {
             element.innerHTML = event.detail.response;
-        console.log('afterFetch foreach')
         });
-        console.log('afterFetch')
     }
 
     fetch() {
         if (this.el.getAttribute('data-cart-widget') !== 'load') {
             return;
-
-            console.log('No Load.')
         }
 
         super.fetch();
-            console.log('Load. after fetch()')
     }
 }

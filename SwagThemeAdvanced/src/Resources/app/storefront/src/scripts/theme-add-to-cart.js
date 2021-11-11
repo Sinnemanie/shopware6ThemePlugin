@@ -3,9 +3,7 @@ import AddToCartPlugin from 'src/plugin/add-to-cart/add-to-cart.plugin.js';
 export default class ThemeAddToCartPlugin extends AddToCartPlugin {
 
     init() {
-        //CookieStorage.setItem(this.options.cookieName, '');
         super.init();
-        console.log('test')
     }
     _openOffCanvasCarts(requestUrl, formData) {
         const offCanvasCartInstances = PluginManager.getPluginInstances('OffCanvasCart');
@@ -13,7 +11,6 @@ export default class ThemeAddToCartPlugin extends AddToCartPlugin {
             super._openOffCanvasCart(offCanvasCartInstances[0], requestUrl, formData);
         }
 
-        console.log('AddToCartPlugin test 1')
     }
 
 }

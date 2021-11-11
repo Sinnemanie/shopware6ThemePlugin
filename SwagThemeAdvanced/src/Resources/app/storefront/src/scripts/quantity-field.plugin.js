@@ -9,7 +9,6 @@ export default class QuantityField extends Plugin {
 
         this.registerEvents()
 
-        console.log('test quantity')
     }
 
     registerEvents() {
@@ -18,11 +17,11 @@ export default class QuantityField extends Plugin {
     }
 
     decreaseQuantity() {
-        console.log('- ..');
+        // console.log('- ..');
         this.field.value = parseInt(this.field.value) - 1
     }
     increaseQuantity() {
-        console.log('+');
+        // console.log('+');
         this.field.value = parseInt(this.field.value) + 1
 
     }
