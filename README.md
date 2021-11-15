@@ -1,5 +1,19 @@
 # shopware6ThemePlugin
 
+## Basic Knowledge
+- create theme (theme = plugin)
+- extend and override templates (twig)
+- teig block system
+- SASS (CSS)
+- Shopware 6 PluginManager
+- extend and override JS Plugins
+- Responsive JS 
+- Bootstrap 4 (CSS, JS)
+- ES 6
+- jquery (slim)
+- Webpack
+
+
 ## Code based on this Training Videos 
 - [Shopware 6 Academy EN: | Creating and activating a Theme](https://academy.shopware.com/courses/take/shopware-6-template-training-english/lessons/9181640-creating-and-activating-a-theme)
 - [Shopware 6 Academy EN: JS Project javascript plugin quantity field](https://academy.shopware.com/courses/take/shopware-6-advanced-template-training-english/lessons/9747216-javascript-plugin-quantity-field)
@@ -75,6 +89,9 @@ export default class MyCustomScript extends Plugin {
 # theme.json
 
 - [developer.shopware.com | theme.json config](https://developer.shopware.com/docs/guides/plugins/themes/theme-configuration#structure-of-theme-configuration)
+
+
+Important: plugin and SCSS order is important, so which is loaded first!
 
 ```json
 {
@@ -216,6 +233,23 @@ export default class MyCustomScript extends Plugin {
 {% block layout_main_navigation %}
     {{ parent() }}
 {% endblock %}
+```
+## Snippts (Translations)
+
+```twig
+{{ "myTheme.mySnippetName" | trans( {"%name%": product.name} ) }}
+```
+
+- en-GB.json
+- de-DE.json
+
+```json
+{
+    "myTheme": {
+        "mySnippetName" : "Show Details",
+        "mySnippetName2" : "Show Details 2"
+    }
+}
 ```
 
 
