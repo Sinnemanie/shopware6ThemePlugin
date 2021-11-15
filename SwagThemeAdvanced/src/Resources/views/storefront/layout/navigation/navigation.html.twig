@@ -1,0 +1,22 @@
+{% extends '@Storefront/storefront/layout/navigation/navigation.html.twig' %}
+
+{% block layout_main_navigation %}
+    {% if theme_config('activateStickyHeader') %}
+        {#
+            Does NOT work anymore:
+            shopware.theme.showOnScrollPosition
+
+            https://academy.shopware.com/courses/take/shopware-6-advanced-template-training-english/lessons/9747217-plugin-sticky-header
+            46:12
+        #}
+        <div class="js-navigation-wrapper test"
+             data-sticky-header="true"
+             data-sticky-header-options='{
+                "showOnScrollPosition": "{{ theme_config('showOnScrollPosition') }}"
+             }'>
+            {{ parent() }}
+        </div>
+    {%  else %}
+        {{ parent() }}
+    {%  endif %}
+{% endblock %}

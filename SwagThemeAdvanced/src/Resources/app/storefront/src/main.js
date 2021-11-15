@@ -1,11 +1,14 @@
 import Rumble from './scripts/rumble';
 import MyCookiePermission from './scripts/my-cookie-permission.plugin';
 import QuantityFieldPlugin from './scripts/quantity-field.plugin';
-import StickyHeader from "./scripts/quantity-field.plugin";
+import StickyHeader from "./scripts/sticky-header";
 
 window.PluginManager.override('AddToCart', Rumble, '[data-add-to-cart]')
 window.PluginManager.override('CookiePermission', MyCookiePermission, '[data-cookie-permission]')
-window.PluginManager.register('StickyHeader', StickyHeader, '[data-sticky-header]')
+
+window.PluginManager.register('StickyHeader', StickyHeader, '[data-sticky-header]', {
+    showOnScrollPosition: 1000
+})
 
 // https://academy.shopware.com/courses/take/shopware-6-advanced-template-training-english/lessons/9747216-javascript-plugin-quantity-field
 window.PluginManager.register('QuantityField', QuantityFieldPlugin, '[data-quantity-field]')
@@ -16,3 +19,4 @@ if (module.hot) {
     module.hot.accept();
 }
 */
+

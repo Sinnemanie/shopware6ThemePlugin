@@ -22,6 +22,12 @@
     ],
     "config": {
         "blocks": {
+            "jsPlugins": {
+                "label": {
+                    "en-GB": "JS Plugin",
+                    "de-DE": "JS Plugin"
+                }
+            },
             "settings": {
                 "label": {
                     "en-GB": "Color Settings",
@@ -44,6 +50,29 @@
             }
         },
         "fields": {
+            "showOnScrollPosition": {
+                "label": {
+                    "en-GB": "Sticky Header Show Position",
+                    "de-DE": "Sticky Header Show Position"
+                },
+                "type": "int",
+                "block": "jsPlugins",
+                "editable": true,
+                "value": 500
+            },
+            "activateStickyHeader": {
+                "label": {
+                    "en-GB": "Activate Sticky Header",
+                    "de-DE": "Stick Header aktivieren"
+                },
+                "type": "switch",
+                "custom": {
+                    "bordered": true
+                },
+                "value": false,
+                "editable": true,
+                "block": "jsPlugins"
+            },
             "sw-color-brand-primary": {
                 "label": {
                     "en-GB": "Primary Color",
