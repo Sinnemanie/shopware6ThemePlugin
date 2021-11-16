@@ -234,6 +234,19 @@ Important: plugin and SCSS order is important, so which is loaded first!
     {{ parent() }}
 {% endblock %}
 ```
+
+## Icon and Link Path
+
+```twig
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{% block layout_header_actions_account %}
+    <a href="{{ path('frontend.account.payment.page') }}" class="btn header-action-btn">
+        {%  sw_icon 'money-card' %}
+    </a>
+{% endblock %}
+```
+
 ## Snippts (Translations)
 
 ```twig
