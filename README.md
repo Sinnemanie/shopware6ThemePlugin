@@ -3,16 +3,34 @@
 ## Basic Knowledge
 - create theme (theme = plugin)
 - extend and override templates (twig)
-- teig block system
-- SASS (CSS)
-- Shopware 6 PluginManager
-- extend and override JS Plugins
+- twig block system (Twig PHP Template Engine from Symfony) 
+    - [twig.symfony.com | for Template Designer](https://twig.symfony.com/doc/3.x/templates.html) 
+- SASS (SCSS -> CSS) (Syntactically Awesome Stylesheets is a CSS Preprozessor)
+- Shopware 6 PluginManager (JS) 
+    - extend and override JS Plugins
+    - [developer.shopware.com/docs | add JS](https://developer.shopware.com/docs/guides/plugins/plugins/storefront/add-custom-javascript#registering-your-plugin)
 - Responsive JS 
-- Bootstrap 4 (CSS, JS)
+- Bootstrap 4 (CSS, JS) (UI Library with CSS and JS based on jquery slim)
+    - [getbootstrap.com | 4.6](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
 - ES 6
+    - [developer.mozilla.org | Classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
 - jquery (slim)
-- Webpack
+- Webpack (modul bundler, also transform, preprocess CSS/SASS/SCSS etc., bundle JS, CSS, minify CSS and HTML and much more)
+    - [web.org](https://webpack.js.org/)
 
+
+## Shopware 6 Certified Template Designer
+- Creating their own custom Shopware themes
+- The inheritance and block system
+- Using Twig and SASS in Shopware
+- Handling CSS and HTML
+
+## Shopware 6 Certified Advanced Template Designer
+- Working with JavaScript in Shopware 6 storefront
+- Using JavaScript Plugin Base and Plugin Manager
+- Debugging JavaScript plugins
+- Extending and overwriting of existing JavaScript plugins
+- Responsive JavaScript, executing Code for different viewports
 
 ## Code based on this Training Videos 
 - [Shopware 6 Academy EN: | Creating and activating a Theme](https://academy.shopware.com/courses/take/shopware-6-template-training-english/lessons/9181640-creating-and-activating-a-theme)
@@ -247,7 +265,7 @@ Important: plugin and SCSS order is important, so which is loaded first!
 {% endblock %}
 ```
 
-## Snippts (Translations)
+## Snippts (Translations) with name
 
 ```twig
 {{ "myTheme.mySnippetName" | trans( {"%name%": product.name} ) }}
@@ -264,7 +282,3 @@ Important: plugin and SCSS order is important, so which is loaded first!
     }
 }
 ```
-
-
-
-
