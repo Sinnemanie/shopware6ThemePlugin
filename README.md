@@ -282,3 +282,156 @@ Important: plugin and SCSS order is important, so which is loaded first!
     }
 }
 ```
+
+## Java Script
+### Writing a JavaScript plugin
+- create example-plugin.plugin.js at *plugin-root/src/Resources/app/storefront/src/example-plugin*
+
+example-plugin.plugin.js
+
+- ExamplePlugin extends the Plugin Class from Shopware 6
+- init() method. This method will be called when your plugin gets initialized and is the entrypoint to your custom logic.
+
+```javascript
+import Plugin from 'src/plugin-system/plugin.class';
+
+export default class ExamplePlugin extends Plugin {
+    init() {
+        window.addEventListener('scroll', this.onScroll.bind(this));
+    }
+
+    onScroll() {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+            alert('Seems like there\'s nothing more to see here.');
+        }
+    }
+}
+```
+### Registering your plugin
+
+
+```javascript
+// Import all necessary Storefront plugins
+import ExamplePlugin from './example-plugin/example-plugin.plugin';
+// Register your plugin via the existing PluginManager
+const PluginManager = window.PluginManager;
+PluginManager.register('ExamplePlugin', ExamplePlugin);
+```
+
+```javascript
+import { COOKIE_CONFIGURATION_UPDATE } from 'src/plugin/cookie/cookie-configuration.plugin';
+document.$emitter.subscribe(COOKIE_CONFIGURATION_UPDATE, eventCallback);
+function eventCallback(updatedCookies) {
+    if (typeof updatedCookies.detail['cookie-key-1'] !== 'undefined') {
+        // The cookie with the cookie attribute "cookie-key-1" either is set active or from active to inactive
+        let cookieActive = updatedCookies.detail['cookie-key-1'];
+    } else {
+        // The cookie with the cookie attribute "cookie-key-1" was not updated
+    }
+}
+```
+
+Let's have a look at the code. There's one thing you have to understand first. When a plugin calls this.$emitter.publish, this event is fired on the plugin's own $emitter instance. This means: Every plugin has its own instance of the emitter. Therefore, you cannot just use this.$emitter.subscribe to listen to other plugin's events.
+
+```javascript
+import Plugin from 'src/plugin-system/plugin.class';
+export default class EventsPlugin extends Plugin {
+    init() {
+        const plugin = window.PluginManager.getPluginInstanceFromElement(document.querySelector('[data-cookie-permission]'), 'CookiePermission');
+        plugin.$emitter.subscribe('hideCookieBar', this.onHideCookieBar);
+    }
+    onHideCookieBar() {
+        alert("The cookie bar has been hidden!");
+    }
+}
+```
+
+## basic structue 
+
+```javascript
+import Plugin from 'src/plugin-system/plugin.class';
+
+export default class ExamplePlugin extends Plugin {
+}
+```
+
+## bin on Scroll
+
+```javascript
+import Plugin from 'src/plugin-system/plugin.class';
+export default class ExamplePlugin extends Plugin {
+    init() {
+        window.addEventListener('scroll', this.onScroll.bind(this));
+    }
+    onScroll() {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+            alert('Seems like there\'s nothing more to see here.');
+        }
+    }
+}
+```
+## init(), super.init(), super._XYMethode
+
+```javascript
+import CookiePermissionPlugin from 'src/plugin/cookie/cookie-permission.plugin';
+import CookieStorage from 'src/helper/storage/cookie-storage.helper';
+export default class MyCookiePermission extends CookiePermissionPlugin {
+    init() {
+        CookieStorage.setItem(this.options.cookieName, '');
+        super.init();
+    }
+    _hideCookieBar() {
+        if (confirm('Do you want to hide the cookie bar?')) {
+            super._hideCookieBar();
+        }
+    }
+}
+```
+
+## Replacing Options
+https://developer.shopware.com/docs/guides/plugins/plugins/storefront/add-custom-javascript#modify-existing-options
+
+```twig
+{% set productSliderOptions = {
+    productboxMinWidth: sliderConfig.elMinWidth.value ? sliderConfig.elMinWidth.value : '',
+    slider: {
+        gutter: 30,
+        autoplayButtonOutput: false,
+        nav: false,
+        mouseDrag: false,
+        controls: sliderConfig.navigation.value ? true : false,
+        autoplay: sliderConfig.rotate.value ? true : false
+    }
+} %}
+<div data-gb-custom-block data-tag="block">
+    <div class="base-slider"
+         data-product-slider="true"
+         data-product-slider-options="{{ productSliderOptions|default({})|json_encode|escape('html_attr') }}">
+    </div>
+</div>
+
+``` 
+
+## finding events
+Finding events
+So before you can start reacting and listening to events, you need to find them first. Since not every plugin implements events, they can be hard to find by just looking through the code.
+Instead, rather search for this.$emitter.publish in the directory platform/src/Storefront/Resources/app/storefront/src to find all occurrences of events being published. This way, you may or may not find an event useful for your needs, so you don't have to override other JavaScript plugins.
+
+
+## Registering to events
+https://developer.shopware.com/docs/guides/plugins/plugins/storefront/reacting-to-javascript-events#registering-to-events
+```javascript
+import Plugin from 'src/plugin-system/plugin.class';
+
+export default class EventsPlugin extends Plugin {
+    init() {
+        const plugin = window.PluginManager.getPluginInstanceFromElement(document.querySelector('[data-cookie-permission]'), 'CookiePermission');
+        
+        plugin.$emitter.subscribe('hideCookieBar', this.onHideCookieBar);
+    }
+
+    onHideCookieBar() {
+        alert("The cookie bar has been hidden!");
+    }
+}
+```
