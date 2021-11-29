@@ -435,3 +435,29 @@ export default class EventsPlugin extends Plugin {
     }
 }
 ```
+## Fetching Data / Ajax Request
+
+https://developer.shopware.com/docs/guides/plugins/plugins/storefront/fetching-data-with-javascript
+
+```javascript
+import Plugin from 'src/plugin-system/plugin.class';
+import HttpClient from 'src/service/http-client.service';
+
+export default class ExamplePlugin extends Plugin {
+    init() {
+        this._client = new HttpClient();
+
+        this.fetchData();
+    }
+
+    // ...
+
+    fetchData() {
+        this._client.get('/widgets/checkout/info', this.handleData);
+    }
+
+    handleData(response) {
+        console.log(response);
+    }
+}
+```
